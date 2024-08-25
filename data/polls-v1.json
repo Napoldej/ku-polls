@@ -1,0 +1,72 @@
+[
+{
+  "model": "polls.question",
+  "pk": 1,
+  "fields": {
+    "question_text": "Which operating system do you prefer?",
+    "pub_date": "2024-08-25T11:15:10.623Z"
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 2,
+  "fields": {
+    "question_text": "Which IDE do you prefer?",
+    "pub_date": "2024-08-25T11:17:17.059Z"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 3,
+  "fields": {
+    "question_text": 1,
+    "choice_text": "macOS",
+    "vote": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 4,
+  "fields": {
+    "question_text": 1,
+    "choice_text": "Windows",
+    "vote": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 5,
+  "fields": {
+    "question_text": 1,
+    "choice_text": "Linux",
+    "vote": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 6,
+  "fields": {
+    "question_text": 2,
+    "choice_text": "Pycharm",
+    "vote": 3
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 7,
+  "fields": {
+    "question_text": 2,
+    "choice_text": "Visual Studio Code",
+    "vote": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 8,
+  "fields": {
+    "question_text": 2,
+    "choice_text": "Xcode",
+    "vote": 0
+  }
+}
+]
