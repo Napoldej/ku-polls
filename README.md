@@ -17,9 +17,9 @@ To be added.
 
 All project documents are in the [Project Wiki](https://github.com/Napoldej/ku-polls/wiki).
 
-- [Vision Statement](https://github.com/Napoldej/ku-polls/wiki/Vision-and-Scope)
-- [Requirements](https://github.com/Napoldej/ku-polls/wiki/Requirements)
-- [Project Plan](https://github.com/Napoldej/ku-polls/wiki/Project-plan)
+- [Vision Statement](../../wiki/Vision-and-Scope)
+- [Requirements](../../wiki/Requirements)
+- [Project Plan](../../wiki/Project-plan)
 
 
 ## Iteration Plans and Boards
