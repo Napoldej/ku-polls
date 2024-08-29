@@ -9,13 +9,15 @@ https://cpske.github.io/ISP) course at [Kasetsart University](https://www.ku.ac.
 
 ## Installation
 
-To be added. If the procedure is long, put it in the wiki or a separate file.
+Check the installation instruction [here](../../wiki/Installation-and-Configuration)
 
 ## Running the Application
 
-To be added.
+```python
+python manage.py runserver
+```
 
-All project documents are in the [Project Wiki](https://github.com/Napoldej/ku-polls/wiki).
+All project documents are in the [Project Wiki](../../wiki).
 
 - [Vision Statement](../../wiki/Vision-and-Scope)
 - [Requirements](../../wiki/Requirements)
@@ -23,4 +25,4 @@ All project documents are in the [Project Wiki](https://github.com/Napoldej/ku-p
 
 
 ## Iteration Plans and Boards
-1. [Iteration plan 1](https://github.com/Napoldej/ku-polls/wiki/iteration-1-plan) and [Board](https://github.com/users/Napoldej/projects/4)
+1. [Iteration plan 1](../../wiki/iteration-1-plan) and [Board](https://github.com/users/Napoldej/projects/4)
