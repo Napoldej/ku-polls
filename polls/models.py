@@ -14,8 +14,23 @@ class Question(models.Model):
     """
 
     question_text = models.CharField(max_length=250)
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField('date published',default = timezone.now)
+    end_date = models.DateTimeField('date ended', null=True)
     
+
+    
+    def is_published(self):
+        now = timezone.now()
+        return now >= self.pub_date         
+    
+    def can_vote(self):
+        now = timezone.now()
+        if self.end_date is not None:
+            return self.pub_date <= now <= self.end_date
+        else:
+            return self.pub_date <= now
+    
+        
     def was_published_recently(self):
         """
         Determines if the question was published within the last day.
@@ -46,7 +61,7 @@ class Choice(models.Model):
         vote (int): The number of votes this choice has received.
     """
 
-    question_text = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=250)
     vote = models.IntegerField(default=0)
     
