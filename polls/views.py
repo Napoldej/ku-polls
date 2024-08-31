@@ -60,7 +60,7 @@ class ResultsView(generic.DetailView):
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     
-    if(not question.can_vote):
+    if(not question.can_vote()):
         messages.error(request, "Poll number {question.id} is not available to vote")
         HttpResponseRedirect(reverse('polls:index'))
         
@@ -72,7 +72,6 @@ def vote(request, question_id):
             messages.error(request,"You didn't select the choice.")
             return render(request, 'polls/detail.html', {
                 'question': question,
-                
             })
         else:
             selected_choice.vote += 1
@@ -80,6 +79,6 @@ def vote(request, question_id):
             # Always return an HttpResponseRedirect after successfully dealing
             # with POST data. This prevents data from being posted twice if a
             # user hits the Back button.
-            return HttpResponseRedirect(reverse('polls:result', args=(question.id,)))
+            return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
         
         
