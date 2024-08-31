@@ -1,7 +1,28 @@
 li a{
-    color: green
+    color: green;
 }
 
 body{
-    background-color: white;
+    background-image: url('images/image1.png');
 }
+
+.results-content {
+    width: 100%;
+    border-collapse: collapse; 
+}
+
+.results-content th {
+    background-color: #f2f2f2;
+    padding: 10px; 
+    text-align: left; 
+}
+
+.results-content td {
+    padding: 20px; 
+    border-bottom: 1px solid #ddd; 
+}
+
+.results-content tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+
