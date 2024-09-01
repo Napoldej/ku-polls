@@ -77,7 +77,7 @@
   "fields": {
     "question": 2,
     "choice_text": "Xcode",
-    "vote": 8
+    "vote": 9
   }
 },
 {
@@ -95,7 +95,7 @@
   "fields": {
     "question": 3,
     "choice_text": "Watching video tutorials",
-    "vote": 0
+    "vote": 1
   }
 },
 {
@@ -104,6 +104,51 @@
   "fields": {
     "question": 3,
     "choice_text": "Taking online courses or workshops",
+    "vote": 2
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 12,
+  "fields": {
+    "question": 2,
+    "choice_text": "JetBrains IntelliJ IDEA",
+    "vote": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 13,
+  "fields": {
+    "question": 2,
+    "choice_text": "Sublime Text",
+    "vote": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 14,
+  "fields": {
+    "question": 2,
+    "choice_text": "NetBeans",
+    "vote": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 15,
+  "fields": {
+    "question": 3,
+    "choice_text": "Hands-On Practice",
+    "vote": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 16,
+  "fields": {
+    "question": 3,
+    "choice_text": "Following Code Examples and Open Source Projects",
     "vote": 0
   }
 }

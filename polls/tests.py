@@ -1,6 +1,5 @@
 from django.test import TestCase
 import datetime
-
 from django.test import client
 from django.utils import timezone
 from django.urls import reverse
@@ -50,7 +49,6 @@ class QuestionModelTests(TestCase):
         future_question = Question(question_text="Future question", pub_date=future_time)
         self.assertIs(future_question.is_published(), False)
 
-        
     def test_cannot_vote_after_end_date(self):
         """Cannot vote if the end_date is in the past"""
         end_date = timezone.now() - timezone.timedelta(days = 1)
