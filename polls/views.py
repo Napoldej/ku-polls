@@ -1,6 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, HttpResponseRedirect
-from .models import Question, Choice
+from .models import Question, Choice, Vote
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -25,7 +26,7 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     """
-    View to display details of a specific question.
+    Display the contents of a specific question and allow voting.
     """
     model = Question
     template_name = 'polls/detail.html'
@@ -82,7 +83,7 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-
+@login_required
 def vote(request, question_id):
     """
     Handles voting for a specific question.
@@ -111,7 +112,16 @@ def vote(request, question_id):
         return render(request, 'polls/detail.html', {
             'question': question,
         })
+    # Reference to the current user.
+    this_user = request.user
+    try:
+        vote = this_user.vote_set.get(user= this_user, choice__question = question)
+        vote.choice = selected_choice
+        vote.save()
+        messages.success(request,f"Your vote for {selected_choice} has been recorded.")
+    except Vote.DoesNotExist:
+        vote = Vote.objects.create(user=this_user, choice=selected_choice)
+        vote.save()
+        messages.success(request,f"Your vote for {selected_choice} has been recorded.")
 
-    selected_choice.vote += 1
-    selected_choice.save()
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

@@ -1,6 +1,8 @@
 import datetime
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -78,8 +80,12 @@ class Choice(models.Model):
 
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=250)
-    vote = models.IntegerField(default=0)
-    
+
+    @property
+    def vote(self):
+        return Vote.objects.filter(choice = self).count()
+
+
     def __str__(self):
         """
         Returns a string representation of the Choice instance.
@@ -87,4 +93,17 @@ class Choice(models.Model):
         Returns:
             str: The text of the choice.
         """
-        return self.choice_text
+        return (f"Choice ID: {self.id}, Choice: {self.choice_text}, ")
+
+
+class Vote(models.Model):
+        """A vote by a user for a choice in a poll"""
+        choice = models.ForeignKey(Choice , on_delete=models.CASCADE)
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+        def __str__(self):
+            return f"Choice: {self.choice}, User: {self.user}"
+
+
+
+
