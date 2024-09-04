@@ -115,7 +115,7 @@ def vote(request, question_id):
     # Reference to the current user.
     this_user = request.user
     try:
-        vote = this_user.vote_set.get(user= this_user, choice=selected_choice)
+        vote = this_user.vote_set.get(user= this_user, choice__question = question)
         vote.choice = selected_choice
         vote.save()
         messages.success(request,f"Your vote for {selected_choice} has been recorded.")

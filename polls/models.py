@@ -83,7 +83,8 @@ class Choice(models.Model):
 
     @property
     def vote(self):
-        return self.vote_set.count()
+        return Vote.objects.filter(choice = self).count()
+
 
     def __str__(self):
         """
