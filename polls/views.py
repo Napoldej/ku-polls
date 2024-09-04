@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
-
+from django.contrib.auth.models import User
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -36,6 +36,20 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.object = self.get_object()
+        vote = None
+        if self.request.user.is_authenticated:
+            try:
+                vote = Vote.objects.get(user=self.request.user, choice__question = self.object)
+            except Vote.DoesNotExist:
+                vote = None
+        context["vote"] = vote
+        return context
+
+
 
     def get(self, request, *args, **kwargs):
         """
@@ -72,6 +86,10 @@ class DetailView(generic.DetailView):
                 f"Poll number {self.object.pk} is not available"
             )
             return redirect("polls:index")
+
+        if self.request.user.is_authenticated:
+            context = self.get_context_data()
+            return render(request, "polls/detail.html", context = context)
 
         return render(request, "polls/detail.html", {"question": self.object})
 
