@@ -7,6 +7,17 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.models import User
+import logging
+
+def get_client_ip(request):
+    """Get the visitor’s IP address using request headers."""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -36,6 +47,8 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
+
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -115,6 +128,7 @@ def vote(request, question_id):
         or re-render voting form with an error message.
     """
     question = get_object_or_404(Question, pk=question_id)
+    this_user = request.user
 
     if not question.can_vote():
         messages.error(
@@ -130,8 +144,6 @@ def vote(request, question_id):
         return render(request, 'polls/detail.html', {
             'question': question,
         })
-    # Reference to the current user.
-    this_user = request.user
     try:
         vote = this_user.vote_set.get(user= this_user, choice__question = question)
         vote.choice = selected_choice
@@ -141,5 +153,4 @@ def vote(request, question_id):
         vote = Vote.objects.create(user=this_user, choice=selected_choice)
         vote.save()
         messages.success(request,f"Your vote for {selected_choice} has been recorded.")
-
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

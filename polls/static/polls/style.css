@@ -6,6 +6,14 @@ body{
     background-image: url('images/image1.png');
 }
 
+.messages p.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+    font-style: italic;
+    font-size: medium;
+}
+
 .results-content {
     width: 100%;
     border-collapse: collapse; 
