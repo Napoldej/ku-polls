@@ -129,28 +129,46 @@ def vote(request, question_id):
     """
     question = get_object_or_404(Question, pk=question_id)
     this_user = request.user
+    logger = logging.getLogger("polls")
+    ip_address = get_client_ip(request)
+    logger.info(f"{this_user} log in from {ip_address}")
+    messages.success(request,f"Login successful for {this_user}")
 
     if not question.can_vote():
         messages.error(
             request,
             f"Poll number {question.id} is not available to vote"
         )
+        logger.warning("This question is not yet voted")
         return HttpResponseRedirect(reverse('polls:index'))
 
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         messages.error(request, "You didn't select a choice.")
+        logger.warning(f"{this_user} didn't select a choice for {question.id} from {ip_address}.")
         return render(request, 'polls/detail.html', {
             'question': question,
         })
+    if this_user.is_authenticated:
+        messages.info(request, "You already voted on this question.")
+
+    try:
+        user = User.objects.get(username=this_user.username)
+        user.save()
+        logger.info(f"{this_user} log in successful")
+    except User.DoesNotExist:
+        messages.error(request, "You didn't login")
+
     try:
         vote = this_user.vote_set.get(user= this_user, choice__question = question)
         vote.choice = selected_choice
         vote.save()
         messages.success(request,f"Your vote for {selected_choice} has been recorded.")
+        logger.info(f"Your vote for {selected_choice} has been recorded.")
     except Vote.DoesNotExist:
         vote = Vote.objects.create(user=this_user, choice=selected_choice)
         vote.save()
         messages.success(request,f"Your vote for {selected_choice} has been recorded.")
+        logger.info(f"Your vote for {selected_choice} has been recorded.")
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
