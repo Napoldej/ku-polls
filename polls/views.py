@@ -6,6 +6,10 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth.signals import user_logged_in, user_logged_out,user_login_failed
+from django.dispatch import receiver
+
+
 import logging
 
 def get_client_ip(request):
@@ -17,6 +21,26 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+@receiver(user_login_failed)
+def log_user_login_failed(sender, request, credentials ,exception=None, **kwargs):
+    logger = logging.getLogger("polls")
+    ip = get_client_ip(request)
+    username = credentials.get('username', None)
+    logger.warning(f"Failed login for {username} from {ip}")
+
+@receiver(user_logged_in)
+def log_user_login(sender, request, user, **kwargs):
+    logger = logging.getLogger("polls")
+    ip_address = get_client_ip(request)
+    messages.success(request,f"Logged in successfully as {user.username}")
+    logger.info(f'User "{user.username}" logged in from IP {ip_address}.')
+
+@receiver(user_logged_out)
+def log_user_logout(sender, request, user, **kwargs):
+    logger = logging.getLogger("polls")
+    ip_address = get_client_ip(request)
+    messages.success(request, f"Logged out from {user.username}")
+    logger.info(f'User "{user.username}" logged out from IP {ip_address}.')
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -83,6 +107,7 @@ class DetailView(generic.DetailView):
                 request,
                 f"Poll number with ID {kwargs['pk']} is not available"
             )
+            logging.error(f"This question {self.object.pk} does not exist")
             return redirect("polls:index")
 
         if not self.object.can_vote():
@@ -167,7 +192,6 @@ def vote_for_poll(request, question_id,logger,selected_choice,this_user):
         vote.choice = selected_choice
         vote.save()
         messages.success(request,f"Your vote for {selected_choice} has been recorded.")
-        #log message when submit vote
         logger.info(f"{this_user.username} has voted for {question.question_text} with {choice_id}")
     except Vote.DoesNotExist:
         vote = Vote.objects.create(user=this_user, choice = selected_choice)

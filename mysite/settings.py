@@ -155,7 +155,7 @@ LOGGING = {
             "formatter": "verbose",
         },
         "console": {
-            "level": "INFO",
+            "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "simple",
         }
@@ -163,8 +163,10 @@ LOGGING = {
     "loggers": {
         'polls':{
             'handlers': ['file', 'console'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         },
     },
 }
+
+MESSAGE_LEVEL = 10
