@@ -156,7 +156,7 @@ def vote(request, question_id):
     logger = logging.getLogger(__name__)
     ip_address = get_client_ip(request)
     logger.info(f"{this_user} log in from {ip_address}")
-    messages.success(request,f"Login successful for {this_user}")
+
 
     #The question has ended already
     if not question.can_vote():

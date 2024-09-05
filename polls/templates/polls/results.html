@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting Results</title>
+    {% extends 'polls/base.html' %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 </head>
+{% block content %}
 <body>
     <h1>Voting Results for "{{ question.question_text }}"</h1>
     {% if messages %}
@@ -36,3 +38,4 @@
     <a href="{% url 'polls:index' %}">Back to Polls</a>
 </body>
 </html>
+{% endblock %}
