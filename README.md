@@ -29,3 +29,4 @@ All project documents are in the [Project Wiki](../../wiki).
 ## Iteration Plans and Boards
 1. [Iteration plan 1](../../wiki/iteration-1-plan) and [Board](https://github.com/users/Napoldej/projects/4)
 2. [Iteation plan 2](../../wiki/iteration-2-plan) and [Board](https://github.com/users/Napoldej/projects/4/views/2)
+3. [Iteration plan 3](../../wiki/iteration-3-plan) and [Board](https://github.com/users/Napoldej/projects/4/views/3)
