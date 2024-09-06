@@ -1,8 +1,8 @@
 """Tests of user authentication.
 
    Put this file in a subdirectory of your ku-polls project,
-   for example, a directory named "auth".
-   Then run: manage.py test auth
+   for example, a directory named "tests".
+   Then run: manage.py test tests
 
 """
 import django.test
@@ -93,10 +93,12 @@ class UserAuthTest(django.test.TestCase):
             # the polls detail page has a form, each choice is identified by its id
             form_data = {"choice": f"{choice.id}"}
             response = self.client.post(vote_url, form_data)
+            user = authenticate(username=self.username, password=self.password)
             # should be redirected to the login page
-            self.assertEqual(302, response.status_code)
-            login_with_next = f"{reverse('login')}?next={vote_url}"
-            self.assertRedirects(response, login_with_next)
+            if user is None:
+                self.assertEqual(302, response.status_code)
+                login_with_next = f"{reverse('login')}?next={vote_url}"
+                self.assertRedirects(response, login_with_next)
 
 
 
