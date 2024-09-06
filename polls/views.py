@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth.signals import (user_logged_in,
                                          user_logged_out, user_login_failed)
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.dispatch import receiver
 from django.urls import reverse
 from django.views import generic
@@ -219,3 +221,25 @@ def vote_for_poll(request, question_id, logger, selected_choice, this_user):
         logger.info(f"{this_user.username} has voted for {question.id} "
                     f"with {choice_id}")
     return redirect('polls:results', question_id)
+
+
+def signup(request):
+    """Register a new user."""
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # get named fields from the form data
+            username = form.cleaned_data.get('username')
+            # password input field is named 'password1'
+            raw_passwd = form.cleaned_data.get('password1')
+            user = authenticate(username=username,password=raw_passwd)
+            login(request, user)
+            return redirect('polls:index')
+        else:
+            messages.error(request, "Your register is invalid")
+            return redirect('signup')
+    else:
+        # create a user form and display it the signup page
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})

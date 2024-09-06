@@ -6,6 +6,10 @@ a.login-link {
     color: white;
 }
 
+a.register-link {
+    color: red;
+}
+
 body{
     background-image: url('images/image1.png');
 }
