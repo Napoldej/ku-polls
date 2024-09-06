@@ -32,14 +32,12 @@ def log_user_login_failed(sender, request, credentials ,exception=None, **kwargs
 def log_user_login(sender, request, user, **kwargs):
     logger = logging.getLogger("polls")
     ip_address = get_client_ip(request)
-    messages.success(request,f"Logged in successfully as {user.username}")
     logger.info(f'User "{user.username}" logged in from IP {ip_address}.')
 
 @receiver(user_logged_out)
 def log_user_logout(sender, request, user, **kwargs):
     logger = logging.getLogger("polls")
     ip_address = get_client_ip(request)
-    messages.success(request, f"Logged out from {user.username}")
     logger.info(f'User "{user.username}" logged out from IP {ip_address}.')
 
 # Create your views here.
@@ -196,6 +194,7 @@ def vote_for_poll(request, question_id,logger,selected_choice,this_user):
     except Vote.DoesNotExist:
         vote = Vote.objects.create(user=this_user, choice = selected_choice)
         vote.save()
-        messages.success(request, "Your choice was successfully recorded.")
+        messages.success(request, f"Your vote for {selected_choice} has been recorded.")
         logger.info(f"{this_user.username} has voted for {question.id} with {choice_id}")
     return redirect('polls:results', question_id)
+
