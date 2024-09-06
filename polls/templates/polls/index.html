@@ -1,20 +1,11 @@
+{% extends 'polls/base.html' %}
 {% load static %}
-
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
-<h1>KU Polls</h1>
-{% if user.is_authenticated %}
-   Welcome back, {{ user.username }} 
-{% else %}
-   Please <a href="{% url 'login' %}?next={{request.path}}">Login</a>
-{% endif %}
 
-<form action="{% url 'logout' %}" method="post"> 
-    {% csrf_token %} 
-   <button type="submit">Log Out</button> 
- </form>
-
-{% if messages %}
+{% block content %}
+    <h1>KU Polls</h1>
+    {% if messages %}
 <ul class="messages">
     {% for message in messages %}
     <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
@@ -32,3 +23,5 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+{% endblock %}
