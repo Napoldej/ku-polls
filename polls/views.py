@@ -192,7 +192,7 @@ def vote_for_poll(request, question_id,logger,selected_choice,this_user):
         vote.choice = selected_choice
         vote.save()
         messages.success(request,f"Your vote for {selected_choice} has been recorded.")
-        logger.info(f"{this_user.username} has voted for {question.question_text} with {choice_id}")
+        logger.info(f"{this_user.username} has voted for {question.id} with {choice_id}")
     except Vote.DoesNotExist:
         vote = Vote.objects.create(user=this_user, choice = selected_choice)
         vote.save()

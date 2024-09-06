@@ -2,6 +2,10 @@ li a{
     color: green;
 }
 
+a.login-link {
+    color: white;
+}
+
 body{
     background-image: url('images/image1.png');
 }
