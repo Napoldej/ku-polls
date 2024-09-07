@@ -9,11 +9,30 @@
             </ul>
             {% endif %}
     <table style="padding: 2ex;">
-    {{ form.as_table }}     {# this line shows the sign-up form #}
+    <div class = "form-field">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.error }}
+    </div>
+    <div class = "form-field">
+        {{ form.password1.label_tag }}
+        {{ form.password1}}
+        {{ form.password1.error }}
+    </div>
+    <div class = "form-field">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        {{ form.password2.error }}
+    </div>
     <tr>
     <td colspan="2">
     <button type="submit">Register</button>
     </td>
     </tr>
     </table>
+    <div class ="help-field">
+        {% for help in form%}
+            {{ help.help_text }}
+        {% endfor %}
+    </div>
 </form>
