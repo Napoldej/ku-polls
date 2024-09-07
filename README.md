@@ -24,7 +24,7 @@ All project documents are in the [Project Wiki](../../wiki).
 - [Vision Statement](../../wiki/Vision-and-Scope)
 - [Requirements](../../wiki/Requirements)
 - [Project Plan](../../wiki/Project-plan)
-
+- [Domain Model](../../wiki/Domain-Model)
 
 ## Iteration Plans and Boards
 1. [Iteration plan 1](../../wiki/iteration-1-plan) and [Board](https://github.com/users/Napoldej/projects/4)
