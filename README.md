@@ -19,6 +19,15 @@ Check the installation instruction [here](../../wiki/Installation-and-Configurat
 python manage.py runserver
 ```
 
+Sample polls and user data are included. There are 3 demo accounts:
+
+| Username | Password |
+|:---------|:---------:|
+|  demo1   | hackme11 |
+|  demo2   | hackme22 |
+|  demo3   | hackme33 |
+
+
 All project documents are in the [Project Wiki](../../wiki).
 
 - [Vision Statement](../../wiki/Vision-and-Scope)
