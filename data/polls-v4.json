@@ -3,7 +3,7 @@
   "model": "polls.question",
   "pk": 1,
   "fields": {
-    "question_text": "Which operating system do you prefer the most?",
+    "question_text": "Which operating system do you prefer?",
     "pub_date": "2024-08-25T11:15:10.623Z",
     "end_date": null
   }
@@ -23,6 +23,33 @@
   "fields": {
     "question_text": "How do you prefer to learn new programming techniques or tools?",
     "pub_date": "2024-08-31T13:29:31.441Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 4,
+  "fields": {
+    "question_text": "Which skill would you most like to learn?",
+    "pub_date": "2024-09-11T12:25:56.468Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 5,
+  "fields": {
+    "question_text": "What motivates you the most at work?",
+    "pub_date": "2024-09-11T12:29:52.139Z",
+    "end_date": "2024-09-11T12:29:52.139Z"
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 6,
+  "fields": {
+    "question_text": "Which social media platform do you use the most?",
+    "pub_date": "2024-09-11T12:32:51.502Z",
     "end_date": null
   }
 },
@@ -139,83 +166,131 @@
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 1,
+  "model": "polls.choice",
+  "pk": 17,
   "fields": {
-    "choice": 12,
-    "user": 1
+    "question": 4,
+    "choice_text": "A new language"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 2,
+  "model": "polls.choice",
+  "pk": 18,
   "fields": {
-    "choice": 14,
-    "user": 1
+    "question": 4,
+    "choice_text": "Playing a musical instrument"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 3,
+  "model": "polls.choice",
+  "pk": 19,
   "fields": {
-    "choice": 11,
-    "user": 1
+    "question": 4,
+    "choice_text": "Coding and programming"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 4,
+  "model": "polls.choice",
+  "pk": 20,
   "fields": {
-    "choice": 16,
-    "user": 1
+    "question": 4,
+    "choice_text": "Cooking and culinary arts"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 5,
+  "model": "polls.choice",
+  "pk": 21,
   "fields": {
-    "choice": 9,
-    "user": 1
+    "question": 5,
+    "choice_text": "Opportunities for career advancement"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 6,
+  "model": "polls.choice",
+  "pk": 22,
   "fields": {
-    "choice": 15,
-    "user": 1
+    "question": 5,
+    "choice_text": "Creative and challenging projects"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 7,
+  "model": "polls.choice",
+  "pk": 23,
   "fields": {
-    "choice": 10,
-    "user": 1
+    "question": 5,
+    "choice_text": "Positive work environment and team dynamics"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 8,
+  "model": "polls.choice",
+  "pk": 24,
   "fields": {
-    "choice": 9,
-    "user": 3
+    "question": 5,
+    "choice_text": "Recognition and rewards"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 9,
+  "model": "polls.choice",
+  "pk": 25,
   "fields": {
-    "choice": 13,
-    "user": 3
+    "question": 6,
+    "choice_text": "Facebook"
   }
 },
 {
-  "model": "polls.vote",
-  "pk": 10,
+  "model": "polls.choice",
+  "pk": 26,
   "fields": {
-    "choice": 5,
-    "user": 3
+    "question": 6,
+    "choice_text": "Instagram"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 27,
+  "fields": {
+    "question": 6,
+    "choice_text": "Twiiter"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 28,
+  "fields": {
+    "question": 6,
+    "choice_text": "Whatsapp"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 29,
+  "fields": {
+    "question": 6,
+    "choice_text": "Reddit"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 30,
+  "fields": {
+    "question": 6,
+    "choice_text": "Tiktok"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 31,
+  "fields": {
+    "question": 6,
+    "choice_text": "Snapchat"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 32,
+  "fields": {
+    "question": 6,
+    "choice_text": "Discord"
   }
 }
 ]
