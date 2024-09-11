@@ -15,9 +15,32 @@ Check the installation instruction [here](../../wiki/Installation-and-Configurat
 
 ## Running the Application
 
-```python
-python manage.py runserver
-```
+1. Activate the virtual environment
+   ```
+   # On Linux or MacOS:
+   source venv/bin/activate
+   
+   # On Windows:
+   venv\Scripts\activate
+   ```
+   
+2. Start the django server
+    ```python
+    python manage.py runserver
+
+    #if you get the message that tell this port is unavailable. replace any number to xxxxx
+    python manage.py runserver xxxxx
+    ```
+
+3. Access the app in a web browser, which is showed on terminal
+    ```python
+    #example http://127.0.0.1:8000/
+    ```
+
+4. Exit the virtual environment by closing the window or by typing:
+   ```
+   deactivate
+   ```
 
 Sample polls and user data are included. There are 3 demo accounts:
 
