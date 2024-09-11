@@ -31,6 +31,10 @@ header{
     font-size: medium;
 }
 
+.status-text{
+    color:blue
+}
+
 .results-content {
     width: 100%;
     border-collapse: collapse; 
