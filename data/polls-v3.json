@@ -3,7 +3,7 @@
   "model": "polls.question",
   "pk": 1,
   "fields": {
-    "question_text": "Which operating system do you prefer?",
+    "question_text": "Which operating system do you prefer the most?",
     "pub_date": "2024-08-25T11:15:10.623Z",
     "end_date": null
   }
@@ -12,7 +12,7 @@
   "model": "polls.question",
   "pk": 2,
   "fields": {
-    "question_text": "Which IDE do you prefer?",
+    "question_text": "Which IDE do you prefer the most?",
     "pub_date": "2024-08-25T11:17:17.059Z",
     "end_date": null
   }
