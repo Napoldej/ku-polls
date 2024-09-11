@@ -46,6 +46,8 @@ Check the installation instruction  <a href="Installation.md">Installation.md</a
    deactivate
    ```
 
+## Demo Accounts
+
 Sample polls and user data are included. There are 3 demo accounts:
 
 | Username | Password |
@@ -55,6 +57,7 @@ Sample polls and user data are included. There are 3 demo accounts:
 |  demo3   | hackme33 |
 
 
+## Documents
 All project documents are in the [Project Wiki](../../wiki).
 
 - [Vision Statement](../../wiki/Vision-and-Scope)
