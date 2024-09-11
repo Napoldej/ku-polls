@@ -40,7 +40,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$870000$wocNvlC4uOWPBMFRnsQHbU$NvRm02wo94oCy4QBt7St4FofkwDABfYbD3T+Z8abpFA=",
-    "last_login": "2024-09-06T06:54:06.575Z",
+    "last_login": "2024-09-06T16:12:03.706Z",
     "is_superuser": false,
     "username": "win",
     "first_name": "",
@@ -58,7 +58,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$870000$GFm14tHa9HyBfG8tjIcaqg$QQHib4KuVCsTA7uvX9Talj5i+R4pKnjZHVMnODObIZY=",
-    "last_login": "2024-09-06T06:58:57.423Z",
+    "last_login": "2024-09-07T19:18:46.055Z",
     "is_superuser": false,
     "username": "demo1",
     "first_name": "",
@@ -103,6 +103,78 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2024-09-06T07:00:10.108Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$pZ96smdTAOpY1KcgndWixk$PIGAtzWZb8ra5mo9lI5hBl/doa4e+7whEn9dwwIQb6Y=",
+    "last_login": "2024-09-06T16:58:10.164Z",
+    "is_superuser": false,
+    "username": "prang123",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-09-06T16:22:26.547Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$tbD7zyJi2RrLiCYUqOSyZf$dFrHrtYusnY0Ho84pqVpYaJAmUWFuKEcc5AYP+t00JI=",
+    "last_login": "2024-09-06T17:15:52.347Z",
+    "is_superuser": false,
+    "username": "winprangwin123",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-09-06T17:13:43.332Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$8JAHMXNJGK75Debs2XJdXA$+LK00ynbp1RmrgW6CLvyIK/Xh2rcZ40dwgAuq+S1I4E=",
+    "last_login": "2024-09-06T17:18:23.370Z",
+    "is_superuser": false,
+    "username": "winwinwinwin1234",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-09-06T17:18:23.101Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$3D8LNdwL9yUSnXOAdQHPfI$ENNe2Akxl3mceGxTVMseFWLaJZVytf1QKlOBYH3Lh04=",
+    "last_login": "2024-09-10T08:42:48.090Z",
+    "is_superuser": false,
+    "username": "winaswe",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-09-07T13:23:05.077Z",
     "groups": [],
     "user_permissions": []
   }
