@@ -45,9 +45,8 @@
     ```
 8. Download data fixtures
     ```
-    python manage.py loaddata data/polls-v4.json
-
-    python manage.py loaddata data/users.json
+    python manage.py loaddata data/polls-v4.json data/votes-v4.json data/users.json
+    
     ```
 
 9. Run test
