@@ -17,21 +17,22 @@ class Question(models.Model):
         end_date (datetime): The date and time when the question
             will end (optional).
     """
+
     question_text = models.CharField(max_length=250)
-    pub_date = models.DateTimeField('date published', default=timezone.now)
-    end_date = models.DateTimeField('date ended', null=True)
-    
+    pub_date = models.DateTimeField("date published", default=timezone.now)
+    end_date = models.DateTimeField("date ended", null=True)
+
     def is_published(self):
         """
         Checks if the question has been published.
 
         Returns:
-            bool: True if the current date and time is after the 
-                  publication date.
+            bool: True if the current date and time is after the
+                publication date.
         """
         now = timezone.now()
         return self.pub_date <= now
-    
+
     def can_vote(self):
         """
         Determines if the question is currently open for voting.
@@ -44,18 +45,18 @@ class Question(models.Model):
         if self.end_date is not None:
             return self.pub_date <= now <= self.end_date
         return self.pub_date <= now
-    
+
     def was_published_recently(self):
         """
         Determines if the question was published within the last day.
 
         Returns:
-            bool: True if the question's publication date is within 
+            bool: True if the question's publication date is within
                   the last day, False otherwise.
         """
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
-    
+
     def __str__(self):
         """
         Returns a string representation of the Question instance.
@@ -64,8 +65,10 @@ class Question(models.Model):
             str: A formatted string showing the question's ID, text,
                  and publication date.
         """
-        return (f"Question ID: {self.id}, Question: {self.question_text}, "
-                f"Published on: {self.pub_date}")
+        return (
+            f"Question ID: {self.id}, Question: {self.question_text}, "
+            f"Published on: {self.pub_date}"
+        )
 
 
 class Choice(models.Model):
@@ -83,8 +86,7 @@ class Choice(models.Model):
 
     @property
     def vote(self):
-        return Vote.objects.filter(choice = self).count()
-
+        return Vote.objects.filter(choice=self).count()
 
     def __str__(self):
         """
@@ -93,17 +95,14 @@ class Choice(models.Model):
         Returns:
             str: The text of the choice.
         """
-        return (f"Choice ID: {self.id}, Choice: {self.choice_text}, ")
+        return f"Choice ID: {self.id}, Choice: {self.choice_text}, "
 
 
 class Vote(models.Model):
-        """A vote by a user for a choice in a poll"""
-        choice = models.ForeignKey(Choice , on_delete=models.CASCADE)
-        user = models.ForeignKey(User, on_delete=models.CASCADE)
+    """A vote by a user for a choice in a poll"""
 
-        def __str__(self):
-            return f"Choice: {self.choice}, User: {self.user}"
+    choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
-
-
+    def __str__(self):
+        return f"Choice: {self.choice}, User: {self.user}"

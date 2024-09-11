@@ -2,8 +2,11 @@ import logging
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, HttpResponseRedirect
-from django.contrib.auth.signals import (user_logged_in,
-                                         user_logged_out, user_login_failed)
+from django.contrib.auth.signals import (
+    user_logged_in,
+    user_logged_out,
+    user_login_failed,
+)
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.dispatch import receiver
@@ -16,11 +19,11 @@ from .models import Question, Choice, Vote
 
 def get_client_ip(request):
     """Get the visitor’s IP address using request headers."""
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
     if x_forwarded_for:
-        ip_address = x_forwarded_for.split(',')[0]
+        ip_address = x_forwarded_for.split(",")[0]
     else:
-        ip_address = request.META.get('REMOTE_ADDR')
+        ip_address = request.META.get("REMOTE_ADDR")
     return ip_address
 
 
@@ -31,7 +34,7 @@ def log_user_login_failed(request, credentials, **kwargs):
     """
     logger = logging.getLogger("polls")
     ip = get_client_ip(request)
-    username = credentials.get('username', None)
+    username = credentials.get("username", None)
     logger.warning(f"Failed login for {username} from {ip}")
 
 
@@ -59,6 +62,7 @@ class IndexView(generic.ListView):
     """
     View to display the list of the most recent questions.
     """
+
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
 
@@ -66,16 +70,18 @@ class IndexView(generic.ListView):
         """
         Returns the last five published questions (excluding future questions).
         """
-        return Question.objects.filter(pub_date__lte=timezone.now()) \
-            .order_by("-pub_date")
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by(
+            "-pub_date"
+        )
 
 
 class DetailView(generic.DetailView):
     """
     Display the contents of a specific question and allow voting.
     """
+
     model = Question
-    template_name = 'polls/detail.html'
+    template_name = "polls/detail.html"
 
     def get_queryset(self):
         """
@@ -92,8 +98,9 @@ class DetailView(generic.DetailView):
         vote = None
         if self.request.user.is_authenticated:
             try:
-                vote = Vote.objects.get(user=self.request.user,
-                                        choice__question=self.object)
+                vote = Vote.objects.get(
+                    user=self.request.user, choice__question=self.object
+                )
             except Vote.DoesNotExist:
                 vote = None
         context["vote"] = vote
@@ -113,11 +120,10 @@ class DetailView(generic.DetailView):
             HttpResponse: The rendered response with question details.
         """
         try:
-            self.object = get_object_or_404(Question, pk=kwargs['pk'])
+            self.object = get_object_or_404(Question, pk=kwargs["pk"])
         except Http404:
             messages.error(
-                request,
-                f"Poll number with ID {kwargs['pk']} is not available"
+                request, f"Poll number with ID {kwargs['pk']} is not available"
             )
             logging.error(f"This question {self.object.pk} does not exist")
             return redirect("polls:index")
@@ -126,14 +132,13 @@ class DetailView(generic.DetailView):
             messages.error(
                 request,
                 f"Poll number {self.object.pk} has ended, "
-                f"which is not allowed for voting."
+                f"which is not allowed for voting.",
             )
             return redirect("polls:index")
 
         if not self.object.is_published():
             messages.error(
-                request,
-                f"Poll number {self.object.pk} is not available"
+                request, f"Poll number {self.object.pk} " f"is not available"
             )
             return redirect("polls:index")
 
@@ -148,8 +153,9 @@ class ResultsView(generic.DetailView):
     """
     View to display the results of a specific question.
     """
+
     model = Question
-    template_name = 'polls/results.html'
+    template_name = "polls/results.html"
 
 
 @login_required
@@ -175,71 +181,83 @@ def vote(request, question_id):
     if not question.can_vote():
         messages.error(
             request,
-            f"Poll number {question.id} is not available to vote"
+            f"Poll number {question.id}  " f"is unavailable for voting.",
         )
         logger.warning("This question is not yet voted")
-        return HttpResponseRedirect(reverse('polls:index'))
+        return HttpResponseRedirect(reverse("polls:index"))
 
     try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):
         messages.error(request, "You didn't select a choice.")
         logger.warning(f"{this_user} didn't select a choice "
-                       f"from {ip_address}.")
-        return render(request, 'polls/detail.html', {
-            'question': question,
-        })
+                       f"" f"from {ip_address}."
+                       )
+        return render(
+            request,
+            "polls/detail.html",
+            {
+                "question": question,
+            },
+        )
 
     vote_for_poll(request, question.id, logger, selected_choice, this_user)
-    return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+    return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
 
 
 def vote_for_poll(request, question_id, logger, selected_choice, this_user):
     """
     Handles voting for a specific question.
     """
-    choice_id = request.POST['choice']
+    choice_id = request.POST["choice"]
     question = get_object_or_404(Question, pk=question_id)
     if not choice_id:
         # no choice_id was set
         messages.error(request, "You didn't make a choice")
-        return redirect('polls:detail', question_id)
+        return redirect("polls:detail", question_id)
     try:
         vote = this_user.vote_set.get(user=this_user,
-                                      choice__question=question)
+                                      choice__question=question
+                                      )
         vote.choice = selected_choice
         vote.save()
-        messages.success(request, f"Your vote for {selected_choice} "
-                                  f"has been recorded.")
-        logger.info(f"{this_user.username} has voted for {question.id} "
-                    f"with {choice_id}")
+        messages.success(
+            request, f"Your vote for {selected_choice} " f"has been recorded."
+        )
+        logger.info(
+            f"{this_user.username} has voted for {question.id} "
+            f"with {choice_id}"
+        )
     except Vote.DoesNotExist:
         vote = Vote.objects.create(user=this_user, choice=selected_choice)
         vote.save()
-        messages.success(request, f"Your vote for {selected_choice} "
-                                  f"has been recorded.")
-        logger.info(f"{this_user.username} has voted for {question.id} "
-                    f"with {choice_id}")
-    return redirect('polls:results', question_id)
+        messages.success(
+            request, f"Your vote for {selected_choice} " f"has been recorded."
+        )
+        logger.info(
+            f"{this_user.username} has voted for {question.id} "
+            f"with {choice_id}"
+        )
+    return redirect("polls:results", question_id)
 
 
 def signup(request):
     """Register a new user."""
-    if request.method == 'POST':
+    if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             # get named fields from the form data
-            username = form.cleaned_data.get('username')
+            username = form.cleaned_data.get("username")
             # password input field is named 'password1'
-            raw_passwd = form.cleaned_data.get('password1')
-            user = authenticate(username=username,password=raw_passwd)
+            raw_passwd = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=raw_passwd)
             login(request, user)
-            return redirect('polls:index')
+            return redirect("polls:index")
         else:
             messages.error(request, "Your register is invalid")
-            return redirect('signup')
+            return redirect("signup")
     else:
         # create a user form and display it the signup page
         form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, "registration/signup.html", {"form": form})
