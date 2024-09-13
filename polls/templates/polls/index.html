@@ -2,33 +2,30 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
-
 {% block content %}
     <h1>KU Polls</h1>
     {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-    {% endfor %}
-</ul>
-{% endif %}
-
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">Question{{question.id}} : {{ question.question_text }}</a></li>
-        <a href = "{% url 'polls:results' question.id%}"> -See the results of Question{{question.id}}</a>
-        <div class = "status-text">
-            {% if question.can_vote%}
-                Status: Active
-            {% else %}
-                Status: Inactive
-            {% endif %}
-        </div>
-    {% endfor %}
+    <ul class="messages">
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
     </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+    {% endif %}
 
+    {% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+        <li>
+            <a href="{% url 'polls:detail' question.id %}">Question {{ question.id }}: {{ question.question_text }}</a>
+            <br>
+            <a href="{% url 'polls:results' question.id %}" class="view-results"> - See the results of Question {{ question.id }}</a>
+            <div class="status-text {% if question.can_vote %}active{% else %}inactive{% endif %}">
+                Status: {% if question.can_vote %}Active{% else %}Inactive{% endif %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No polls are available.</p>
+    {% endif %}
 {% endblock %}

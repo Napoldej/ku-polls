@@ -98,5 +98,39 @@ class UserAuthTest(django.test.TestCase):
             login_with_next = f"{reverse('login')}?next={vote_url}"
             self.assertRedirects(response, login_with_next)
 
+    def test_redirect_polls_page_after_signup(self):
+        """
+        Test if user is redirected to the polls page after a successful signup.
+        """
+        register_url = reverse("signup")
+
+        # Load the signup page
+        response = self.client.get(register_url)
+        self.assertEqual(response.status_code, 200)  # Verify the signup page loads correctly
+
+        # Prepare new user data to avoid conflicts with self.user1
+        new_user_data = {
+            'username': 'newuser',
+            'password1': 'NewPassword123!',
+            'password2': 'NewPassword123!',
+            'email': 'newuser@nowhere.com',
+        }
+
+        # Submit the form with valid user data
+        response = self.client.post(register_url, new_user_data)
+
+        # Verify that after successful signup, we are redirected to the polls page
+        self.assertRedirects(response, reverse('polls:index'))
+
+        # Verify that the new user can now log in
+        login_successful = self.client.login(username=new_user_data['username'], password=new_user_data['password1'])
+        self.assertTrue(login_successful)
 
 
+    def test_invalid_username(self):
+        login_url  = reverse('login')
+        response = self.client.get(login_url)
+        self.assertEqual(200, response.status_code)
+        form_data = {"username": "invalid_username", "password": self.password}
+        response = self.client.post(login_url, form_data)
+        self.assertEqual(200, response.status_code)
