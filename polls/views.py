@@ -19,7 +19,7 @@ from .models import Question, Choice, Vote
 
 def get_client_ip(request):
     """Get the visitor’s IP address using request headers."""
-    if (request == None):
+    if (request is None):
         return False
     x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
     if x_forwarded_for:
