@@ -18,10 +18,10 @@
 4. Activate The Virtual Environment
     ```python
     # On Linux or MacOS:
-    source venv/bin/activate
+    source env/bin/activate
 
     # On Windows:
-    call venv\Scripts\activate
+    call env\Scripts\activate
     ```
 
 5. Download the requirement package for running this application

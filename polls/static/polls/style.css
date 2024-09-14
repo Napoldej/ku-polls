@@ -11,7 +11,7 @@ a.register-link {
 }
 
 body{
-    background-image: url('images/image1.png');
+    background-image: url('images/background.png');
 }
 
 header{
@@ -30,6 +30,7 @@ header{
     font-style: italic;
     font-size: medium;
 }
+
 
 .status-text{
     color:red
@@ -90,6 +91,12 @@ h1 {
 }
 
 .error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+/* Ensure this part is in your CSS */
+.messages p.error {
     background-color: #f2dede;
     color: #a94442;
 }

@@ -3,15 +3,6 @@
 <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
     <fieldset>
-    {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    {% if "success" in message %}
-                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            {% endif %}
         <legend><h1>{{ question.question_text }}</h1></legend>
         {% if messages %}
             <ul class="messages">
