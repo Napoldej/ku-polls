@@ -6,9 +6,9 @@
   {{ form.as_p }}
   <p>
   <button type="submit">Login</button>
+      <a href = "{% url 'signup' %}">sign up</a>
   </p>
   <input type="hidden" name="next" value="{{next}}"/>
  </form>
- {# If you have a sign-up page, then add a link here #}
 </body>
 </html>
