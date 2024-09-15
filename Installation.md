@@ -21,7 +21,7 @@
     source env/bin/activate
 
     # On Windows:
-    call env\Scripts\activate
+    env\Scripts\activate
     ```
 
 5. Download the requirement package for running this application
