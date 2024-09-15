@@ -23,10 +23,10 @@ Check the installation instruction  <a href="Installation.md">Installation.md</a
 1. Activate the virtual environment
    ```
    # On Linux or MacOS:
-   source venv/bin/activate
+   source env/bin/activate
    
    # On Windows:
-   venv\Scripts\activate
+   env\Scripts\activate
    ```
    
 2. Start the django server
