@@ -16,7 +16,7 @@ https://cpske.github.io/ISP) course at [Kasetsart University](https://www.ku.ac.
 Check the installation instructions [here](../../wiki/Installation-and-Configuration)
 
 - In the file:
-Check the installation instruction  <a href="Installation.md">Installation.md</a> file 
+Check the installation instruction  [Installation Guide](./Installation.md) file 
 
 ## Running the Application
 
